@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "koon-fetch": {
+      "command": "npx",
+      "args": ["-y", "koon-mcp"]
+    }
+  }
+}
