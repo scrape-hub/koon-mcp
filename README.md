@@ -8,11 +8,18 @@ Built on [koon](https://github.com/scrape-hub/koon) — a browser impersonation 
 
 Standard `fetch`, `curl`, or built-in web tools get blocked by bot detection on many popular websites (403 Forbidden, CAPTCHAs, empty responses). koon-mcp solves this by making requests that are indistinguishable from a real browser at the TLS and HTTP/2 protocol level.
 
-| Site | curl / standard fetch | koon-mcp |
-|---|---|---|
-| ticketmaster.com | 403 Forbidden | Full content |
-| nike.com | JS challenge / blocked | Full content |
-| linkedin.com | Restricted | Full content |
+| Site | Category | Standard fetch | koon-mcp |
+|---|---|---|---|
+| medium.com | Articles / Blog | 403 | Full content |
+| bloomberg.com | Financial news | 403 | Full content |
+| ticketmaster.com | Events / Tickets | 403 | Full content |
+| zillow.com | Real estate | 403 | Full content |
+| glassdoor.com | Jobs / Salaries | 403 | Full content |
+| stockx.com | E-Commerce | 403 | Full content |
+| tripadvisor.com | Travel / Reviews | 403 | Full content |
+| bestbuy.com | Electronics | Timeout | Full content |
+| nike.com | E-Commerce | JS skeleton only | Full content |
+| linkedin.com | Social / Jobs | Restricted | Full content |
 
 ## Features
 
