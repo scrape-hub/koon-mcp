@@ -4,7 +4,7 @@
   "description": "MCP server that fetches web content using koonjs browser impersonation — bypasses Cloudflare, Akamai, and other bot detection",
   "type": "module",
   "bin": {
-    "koon-mcp": "./build/index.js"
+    "koon-mcp": "build/index.js"
   },
   "files": [
     "build/",
