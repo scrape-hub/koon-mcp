@@ -11,7 +11,7 @@ function getClient(): InstanceType<typeof Koon> {
   if (!client) {
     client = new Koon({
       browser: "chrome145",
-      timeout: 30000,
+      timeout: 30,
       followRedirects: true,
       maxRedirects: 10,
     });
