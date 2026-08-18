@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to publish (e.g. v0.8.1)"
+        required: true
+
+jobs:
+  publish-npm:
+    runs-on: ubuntu-latest
+    # Trusted publishing: npm mints a short-lived credential from the OIDC
+    # token, so no NPM_TOKEN secret and no interactive 2FA prompt is involved.
+    # The package must name this workflow as its trusted publisher:
+    #   npm trust github koon-mcp --repo scrape-hub/koon-mcp --file release.yml --allow-publish
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+
+      # Node 24: trusted publishing needs npm 11.5.1+, and current npm releases
+      # refuse to install on Node 20.
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+          registry-url: https://registry.npmjs.org
+
+      - name: Update npm
+        run: npm install -g npm@latest
+
+      - name: Show npm version
+        run: npm --version
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify the built server starts
+        run: node -e "require('fs').accessSync('build/index.js')"
+
+      - name: Publish
+        run: npm publish --access public

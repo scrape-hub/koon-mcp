@@ -5,6 +5,16 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.1] - 2026-08-18
+
+### Changed
+
+- Picks up koon 0.8.1, which adds profiles for the current stable browsers
+  (Chrome 152, Firefox 154, Edge 151, Opera 134, Safari 26.6) and corrects the
+  TLS fingerprints of Chrome 150+ and Firefox 151+. The `^0.8.0` range already
+  allowed it; the lockfile is updated so fresh installs actually get it.
+- Bumped the MCP server version reported over the protocol to 0.8.1.
+
 ## [0.8.0] - 2026-07-29
 
 ### Changed

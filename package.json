@@ -1,6 +1,6 @@
 {
   "name": "koon-mcp",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "MCP server that fetches web content using koonjs browser impersonation — bypasses Cloudflare, Akamai, and other bot detection",
   "type": "module",
   "bin": {
@@ -36,7 +36,7 @@
     "@modelcontextprotocol/sdk": "^1.27.1",
     "@mozilla/readability": "^0.6.0",
     "jsdom": "^26.0.0",
-    "koonjs": "^0.8.0",
+    "koonjs": "^0.8.1",
     "turndown": "^7.2.0",
     "zod": "^3.25.0"
   },
