@@ -5,6 +5,30 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2026-09-28
+
+### Changed
+
+- Built on koon 1.0.0 (`koonjs` `^1.0.0`), whose browser fingerprints were
+  rebuilt against real browser traffic on TLS, HTTP/2 and HTTP/3.
+- Fetches as the latest Chrome koon knows instead of the fixed Chrome 145,
+  whose fingerprint no longer matched the Chrome that sites see today.
+- The MCP server reports version 1.0.0.
+
+### Added
+
+- `.claude-plugin/marketplace.json`, so `claude plugin marketplace add
+  scrape-hub/koon-mcp` works as the README describes. Before, the repository
+  had no marketplace file and the command failed.
+- A LICENSE file with the MIT license the package already declared.
+
+### Fixed
+
+- A page's CSS and script errors no longer reach stderr as stack traces on
+  every fetch; JSDOM now gets a console of its own.
+- The README's comparison with Node.js `fetch` is measured again. Five of
+  the ten sites no longer block plain `fetch` and were dropped from it.
+
 ## [0.8.1] - 2026-08-18
 
 ### Changed
@@ -20,13 +44,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Bumped `koonjs` to `^0.8.0`. The previous `^0.7.0` caret range could not
-  resolve 0.8.0 — for `0.x` versions a caret pins the minor — so installs kept
+  resolve 0.8.0 (for `0.x` versions a caret pins the minor), so installs kept
   a nested koonjs 0.7.0 alongside any newer top-level copy.
 - Bumped the MCP server version reported over the protocol to 0.8.0.
 - Bumped `.claude-plugin/plugin.json` to 0.8.0. It was still on 0.6.0, having
   been missed during the 0.7.0 release.
 
-## [0.7.0] - 2026-07-XX
+## [0.7.0] - 2026-03-24
 
 Published to npm but never committed; recorded here for completeness.
 
@@ -40,7 +64,7 @@ Published to npm but never committed; recorded here for completeness.
 
 - Bumped `koonjs` to `^0.7.0`.
 
-## [0.6.0]
+## [0.6.0] - 2026-03-17
 
 ### Added
 

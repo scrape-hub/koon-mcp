@@ -10,7 +10,8 @@ let client: InstanceType<typeof Koon> | null = null;
 function getClient(): InstanceType<typeof Koon> {
   if (!client) {
     client = new Koon({
-      browser: "chrome145",
+      // The latest Chrome koon knows: a pinned version falls behind the real browser.
+      browser: "chrome",
       timeout: 30,
       followRedirects: true,
       maxRedirects: 10,

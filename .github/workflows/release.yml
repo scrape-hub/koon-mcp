@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Tag to publish (e.g. v0.8.1)"
+        description: "Tag to publish (e.g. v1.0.0)"
         required: true
 
 jobs:
@@ -20,13 +20,13 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           ref: ${{ inputs.tag || github.ref }}
 
       # Node 24: trusted publishing needs npm 11.5.1+, and current npm releases
       # refuse to install on Node 20.
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7
         with:
           node-version: "24"
           registry-url: https://registry.npmjs.org

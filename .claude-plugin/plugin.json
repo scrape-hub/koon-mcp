@@ -1,11 +1,12 @@
 {
   "name": "koon-fetch",
   "description": "Browser-impersonating web fetch that bypasses Cloudflare, Akamai, and other bot detection. Uses TLS/HTTP2 fingerprint impersonation via koon to fetch any URL as a real browser would.",
-  "version": "0.8.1",
+  "version": "1.0.0",
   "author": {
-    "name": "Wedge Antilles",
+    "name": "scrape-hub",
     "url": "https://github.com/scrape-hub"
   },
+  "homepage": "https://github.com/scrape-hub/koon-mcp#readme",
   "repository": "https://github.com/scrape-hub/koon-mcp",
   "license": "MIT",
   "keywords": [
@@ -18,6 +19,5 @@
     "bot-detection",
     "tls-fingerprint",
     "http2"
-  ],
-  "category": "web"
+  ]
 }

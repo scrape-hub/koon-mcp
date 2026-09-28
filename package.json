@@ -1,7 +1,7 @@
 {
   "name": "koon-mcp",
-  "version": "0.8.1",
-  "description": "MCP server that fetches web content using koonjs browser impersonation — bypasses Cloudflare, Akamai, and other bot detection",
+  "version": "1.0.0",
+  "description": "MCP server that fetches web content with koonjs browser impersonation and gets past Cloudflare, Akamai and other bot detection",
   "type": "module",
   "bin": {
     "koon-mcp": "build/index.js"
@@ -32,11 +32,12 @@
     "url": "https://github.com/scrape-hub/koon-mcp"
   },
   "license": "MIT",
+  "author": "scrape-hub",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.27.1",
     "@mozilla/readability": "^0.6.0",
     "jsdom": "^26.0.0",
-    "koonjs": "^0.8.1",
+    "koonjs": "^1.0.0",
     "turndown": "^7.2.0",
     "zod": "^3.25.0"
   },

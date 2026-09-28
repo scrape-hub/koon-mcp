@@ -1,5 +1,5 @@
 import jsdom from "jsdom";
-const { JSDOM } = jsdom;
+const { JSDOM, VirtualConsole } = jsdom;
 import readability from "@mozilla/readability";
 const { Readability } = readability;
 import TurndownService from "turndown";
@@ -14,7 +14,9 @@ const turndown = new TurndownService({
 turndown.remove(["img", "script", "style", "iframe", "video", "audio"]);
 
 export function htmlToMarkdown(html: string, url: string): string {
-  const dom = new JSDOM(html, { url });
+  // A console of its own: the page's CSS and script errors would otherwise go to
+  // stderr as stack traces on every fetch.
+  const dom = new JSDOM(html, { url, virtualConsole: new VirtualConsole() });
   const doc = dom.window.document;
 
   // Try Readability first for clean article extraction

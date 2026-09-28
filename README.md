@@ -1,51 +1,49 @@
 # koon-mcp
 
-MCP server for Claude Code that fetches web content using real browser TLS/HTTP2 fingerprints. Bypasses Cloudflare, Akamai, and other bot detection systems that block standard HTTP clients.
+An MCP server for Claude Code that fetches web pages with real browser fingerprints. Sites behind Cloudflare, Akamai and other bot detection that block ordinary HTTP clients see the same TLS, HTTP/2 and HTTP/3 handshake from it as from a real browser.
 
-Built on [koon](https://github.com/scrape-hub/koon) — a browser impersonation library using Rust + BoringSSL.
+It is built on [koon](https://github.com/scrape-hub/koon), a browser-impersonating HTTP client written in Rust on BoringSSL.
 
-## Why?
+## Why
 
-Standard `fetch`, `curl`, or built-in web tools get blocked by bot detection on many popular websites (403 Forbidden, CAPTCHAs, empty responses). koon-mcp solves this by making requests that are indistinguishable from a real browser at the TLS and HTTP/2 protocol level.
+`fetch`, `curl` and built-in web tools get blocked on many popular sites: a 403, a CAPTCHA page or an empty response. koon-mcp sends requests that look like a real browser's down to the TLS and HTTP/2 level.
 
-| Site | Category | Standard fetch | koon-mcp |
+Home pages fetched with Node.js `fetch` and with koon-mcp 1.0.0 on 2026-09-28.
+Which sites block what changes over time.
+
+| Site | Category | Node.js `fetch` | koon-mcp |
 |---|---|---|---|
-| medium.com | Articles / Blog | 403 | Full content |
-| bloomberg.com | Financial news | 403 | Full content |
-| ticketmaster.com | Events / Tickets | 403 | Full content |
-| zillow.com | Real estate | 403 | Full content |
-| glassdoor.com | Jobs / Salaries | 403 | Full content |
-| stockx.com | E-Commerce | 403 | Full content |
-| tripadvisor.com | Travel / Reviews | 403 | Full content |
-| bestbuy.com | Electronics | Timeout | Full content |
-| nike.com | E-Commerce | JS skeleton only | Full content |
-| linkedin.com | Social / Jobs | Restricted | Full content |
+| medium.com | Articles / Blog | 403 | 200 |
+| bloomberg.com | Financial news | 403 | 200 |
+| glassdoor.com | Jobs / Salaries | 403 | 200 |
+| stockx.com | E-Commerce | 403 | 200 |
+| tripadvisor.com | Travel / Reviews | 403 | 200 |
 
 ## Features
 
-- **Browser impersonation** — Chrome, Firefox, Safari, Edge fingerprints (175+ profiles)
-- **HTML → Markdown** — Clean extraction using Readability + Turndown (no images, scripts, iframes)
-- **JSON handling** — Auto-formats JSON responses as fenced code blocks
-- **15-minute cache** — Self-cleaning in-memory cache to avoid redundant requests
-- **Content truncation** — Large pages capped at 100k characters to stay within context limits
-- **Auto HTTPS upgrade** — `http://` URLs are automatically upgraded to `https://`
+- **Browser impersonation**: requests go out as the latest Chrome that koon knows, with its TLS, HTTP/2 and HTTP/3 fingerprint.
+- **HTML to Markdown**: Readability extracts the main content and Turndown converts it, without images, scripts or iframes.
+- **JSON**: JSON responses come back as fenced code blocks.
+- **15-minute cache**: repeated fetches of the same URL are answered from memory.
+- **Truncation**: pages are capped at 100,000 characters to fit the context.
+- **Default scheme**: a URL without a scheme is fetched over `https://`.
 
-## Install as Claude Code Plugin
-
-```bash
-claude plugin install koon-fetch
-```
-
-Or add the marketplace first if not yet available in the official directory:
+## Install as a Claude Code plugin
 
 ```bash
 claude plugin marketplace add scrape-hub/koon-mcp
-claude plugin install koon-fetch@scrape-hub/koon-mcp
+claude plugin install koon-fetch@koon-marketplace
 ```
 
-## Manual Setup
+## Manual setup
 
-Add to your Claude Code MCP config (`~/.claude/settings.json` or project `.mcp.json`):
+To use the MCP server without the plugin:
+
+```bash
+claude mcp add koon-fetch -- npx -y koon-mcp
+```
+
+Or in a project's `.mcp.json`:
 
 ```json
 {
@@ -62,7 +60,7 @@ Add to your Claude Code MCP config (`~/.claude/settings.json` or project `.mcp.j
 
 ### `koon_fetch`
 
-Fetches a URL and returns the content as markdown.
+Fetches a URL and returns the content as Markdown.
 
 **Parameters:**
 
@@ -71,24 +69,24 @@ Fetches a URL and returns the content as markdown.
 | `url` | string | yes | The URL to fetch |
 | `prompt` | string | no | Hint for what information to extract |
 
-**Example usage in Claude Code:**
+**Example in Claude Code:**
 
 > "Fetch the pricing page from example.com"
 
-Claude will call `koon_fetch` with `url: "https://example.com/pricing"` and return clean markdown content.
+Claude calls `koon_fetch` with `url: "https://example.com/pricing"` and gets the page back as Markdown.
 
-## How It Works
+## How it works
 
-1. **koonjs** opens a TLS connection with a real browser fingerprint (JA3, AEAD, ALPN, HTTP/2 frames)
-2. The response HTML is parsed with **JSDOM**
-3. **Readability** extracts the main article content (falls back to full body)
-4. **Turndown** converts HTML to clean markdown
-5. Result is cached for 15 minutes
+1. koonjs opens the connection with the browser's TLS ClientHello and HTTP/2 or HTTP/3 settings.
+2. JSDOM parses the HTML.
+3. Readability extracts the main content, or the whole body if it finds none.
+4. Turndown converts the HTML to Markdown.
+5. The result is cached for 15 minutes.
 
 ## Requirements
 
-- Node.js 18+
-- koon native binaries are bundled with `koonjs` (no extra install needed)
+- Node.js 18.17 or newer
+- The koon native binaries come with `koonjs`, so there is nothing else to install.
 
 ## License
 
