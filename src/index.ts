@@ -10,7 +10,7 @@ import { fetchUrl } from "./fetcher.js";
 
 const server = new McpServer({
   name: "koon-fetch",
-  version: "1.0.1",
+  version: "1.1.0",
 });
 
 server.registerTool(
@@ -20,6 +20,8 @@ server.registerTool(
     description:
       "Fetches content from a URL using browser-impersonating HTTP client (bypasses Cloudflare, Akamai, and other bot detection). " +
       "Converts HTML to clean markdown. Handles JSON, plain text, and binary content. " +
+      "When a site turns away the request as Chrome, tries Firefox and Safari; if all three are turned away, names the bot protection that answered. " +
+      "Stack Overflow and other Stack Exchange question links return the question with its top answers through the official API. " +
       "PDFs: returns their text marked by page number; a long PDF from page 1 on up to about 16,000 characters plus its " +
       "outline, further pages with `pages` (e.g. \"5-8\", up to 20 per call, from a working copy kept for the session). " +
       "A paper that names a DOI or arXiv id also gets title, authors, year and DOI. " +
@@ -55,6 +57,9 @@ server.registerTool(
 
       let responseText = "";
       responseText += `**Source:** ${result.url}\n`;
+      if (result.via) {
+        responseText += `**Fetched via:** ${result.via}\n`;
+      }
       if (result.cached) {
         responseText += `**Cached:** yes (15-min TTL)\n`;
       }

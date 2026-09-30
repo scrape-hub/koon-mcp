@@ -72,7 +72,7 @@ async function read(pdf: PdfProxy): Promise<ParsedPdf> {
     };
     await walk(root, 1);
   } catch {
-    // most papers have no outline
+    // an outline that cannot be read is left out
   }
 
   return { totalPages, pages, infoTitle, outline };

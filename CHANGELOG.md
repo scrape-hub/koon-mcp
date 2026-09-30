@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-09-30
+
+### Added
+
+- When a site turns away the request as Chrome, `koon_fetch` tries Firefox and
+  Safari.
+- Stack Overflow and other Stack Exchange questions come with their top
+  answers through the official API.
+
+### Changed
+
+- Requests ask for pages in the language of the system, as the browser on the
+  same machine does.
+- A page that stays blocked is reported with the bot protection that answered
+  instead of being returned as content; a page that builds its text with
+  JavaScript says so.
+
 ## [1.0.1] - 2026-09-29
 
 ### Fixed

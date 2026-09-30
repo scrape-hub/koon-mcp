@@ -130,7 +130,6 @@ function sameTitle(a: string, b: string): boolean {
  *   a reference entry it follows the authors on the same line
  * - the first author's family name is on the title page
  * - a real title in the PDF's own document info does not contradict it
- * Checked against arXiv, PLOS, bioRxiv, NEJM, Lancet, BMJ, Nature, Frontiers and BMC papers.
  */
 function belongsToPdf(meta: PaperMeta, pdf: ParsedPdf): boolean {
   const text = normLines(titlePages(pdf));

@@ -34,7 +34,10 @@ claude plugin install koon-fetch@koon-marketplace
 
 ## Features
 
-- **Browser impersonation**: requests go out as the latest Chrome that koon knows, with its TLS, HTTP/2 and HTTP/3 fingerprint.
+- **Browser impersonation**: requests go out as the latest Chrome that koon knows, with its TLS, HTTP/2 and HTTP/3 fingerprint and the language of your system.
+- **Browser fallback**: when a site turns away the request as Chrome, it goes out again as Firefox, then Safari.
+- **Stack Overflow**: questions on Stack Overflow and the other Stack Exchange sites come with their top answers through the official API.
+- **Blocks named**: when all three are turned away, the error names the bot protection that answered, instead of returning its page as content.
 - **HTML to Markdown**: Readability extracts the main content and Turndown converts it, without images, scripts or iframes.
 - **JSON**: JSON responses come back as fenced code blocks.
 - **PDF**: text with page numbers, more pages on request, papers with title, authors and DOI. See [PDFs](#pdfs).
@@ -94,7 +97,7 @@ Claude calls `koon_fetch` with `url: "https://example.com/pricing"` and gets the
 
 ## How it works
 
-1. koonjs opens the connection with the browser's TLS ClientHello and HTTP/2 or HTTP/3 settings.
+1. koonjs opens the connection with the TLS ClientHello and HTTP/2 or HTTP/3 settings of Chrome, or of Firefox and then Safari when the site turns the request away.
 2. HTML: JSDOM parses the page, Readability extracts the main content (or the whole body if it finds none) and Turndown converts it to Markdown.
 3. PDF: pdf.js, through `unpdf`, extracts the text of each page.
 4. Pages are cached for 15 minutes; a PDF stays as a working copy for the session.
