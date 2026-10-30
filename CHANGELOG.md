@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-10-30
+
+### Changed
+
+- koonjs 1.2.0: Firefox 158, and the Accept-Language each browser sends for
+  the system language.
+
 ## [1.1.0] - 2026-09-30
 
 ### Added
