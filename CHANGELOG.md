@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-11-05
+
+### Changed
+
+- koonjs 2.0.0: Chrome 157, Firefox 159, Edge 156, Opera 139 and Brave on
+  Chromium 156.
+
 ## [1.1.1] - 2026-10-30
 
 ### Changed
