@@ -10,7 +10,7 @@ import { fetchUrl } from "./fetcher.js";
 
 const server = new McpServer({
   name: "koon-fetch",
-  version: "1.1.2",
+  version: "1.1.3",
 });
 
 server.registerTool(
