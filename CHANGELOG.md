@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.4] - 2026-11-11
+
+### Changed
+
+- koonjs 2.1.0: Chrome 158, Edge 157 and Brave 1.99, and redirects sent as
+  the browser sends them.
+
 ## [1.1.3] - 2026-11-05
 
 ### Changed
